@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+
+    <!-- Link bottraps framework -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/bootstrap.css">
+
+    <!-- Link font and icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+        integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+        integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="icon" href="/images/logo-header.png">
+    <!-- Link CSS file -->
+    <link rel="stylesheet" href="/css/taimain.css">
+    <link rel="stylesheet" href="/css/taibase.css">
+    <link rel="stylesheet" href="/css/tairesponsive.css">
+
+</head>
+
+<body>
+    <div class="myapp">
+        <div class="container-fluid header-cover" id="header-cover">
+            <nav class="navbar">
+                <div class="container-sm header-width__custome">
+                    <div class="col-4 navbar-cover__logo">
+                        <a class="navbar-logo" th:href="@{/}">
+                            <img src="/images/logo-header.png" alt="" class="navbar-logo__img">
+                            <h1 class="navbar-logo__content">Phone<span class="navbar-logo__symbol">Z</span></h1>
+                        </a>
+                    </div>
+                    <div class="col-8 navbar-cover__info">
+                        <div class="navbar-info">
+                            <h4 class="navbar-info-content">If you have any question contact us on number:
+                            </h4>
+                            <span class="navbar-info-phonenumber">078-790-3125</span>
+                        </div>
+                        <div class="navbar-navigation">
+                            <ul class="navbar-navigation__list">
+                                <a class="navbar-navigation__link" sec:authorize="isAuthenticated()">
+                                    <li class="navbar-navigation__item">
+                                        <i class="fa-solid fa-user navbar-navigation__icon"></i>
+                                        <span class="navbar-navigation__content"
+                                            th:text="${#session.getAttribute('email')}">emal@gmailc.om</span>
+                                    </li>
+                                </a>
+                                <a th:href="@{/login}" class="navbar-navigation__link" sec:authorize="isAnonymous()">
+                                    <li class="navbar-navigation__item">
+                                        <i class="fa-solid fa-user navbar-navigation__icon"></i>
+                                        <span class="navbar-navigation__content">Create
+                                            your
+                                            Acount</span>
+                                    </li>
+                                </a>
+                                <a th:href="@{/login}" class="navbar-navigation__link" sec:authorize="isAnonymous()">
+                                    <li class="navbar-navigation__item">
+                                        <i class="fa-solid fa-key navbar-navigation__icon"></i>
+                                        <span class="navbar-navigation__content">Login</span>
+                                    </li>
+                                </a>
+                                <a th:href="@{/bills/history/{id}(id=${#session.getAttribute('userId')})}"
+                                    class="navbar-navigation__link" sec:authorize="isAuthenticated()">
+                                    <li class="navbar-navigation__item">
+                                        <i class="fa-solid fa-list-check navbar-navigation__icon"></i>
+                                        <span class="navbar-navigation__content">History</span>
+                                    </li>
+                                </a>
+                                <a th:href="@{/logout}" class="navbar-navigation__link"
+                                    sec:authorize="isAuthenticated()">
+                                    <li class="navbar-navigation__item">
+                                        <i class="fa-solid fa-right-from-bracket navbar-navigation__icon"></i>
+                                        <span class="navbar-navigation__content">Logout</span>
+                                    </li>
+                                </a>
+                                <a th:href="@{/cart}" class="navbar-navigation__link">
+                                    <li class="navbar-navigation__item">
+                                        <i class="fa-solid fa-cart-shopping navbar-navigation__icon">
+                                            <span class="navbar-navigation__number"
+                                                th:text="${#session.getAttribute('cartCount')}">0</span>
+                                        </i>
+                                        <span class="navbar-navigation__content">Cart</span>
+                                    </li>
+                                </a>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <nav class="header">
+                <div class="container-sm">
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="header-title">
+                                <ul class="header-title__list">
+                                    <a class="header-title__link" th:href="@{/}">
+                                        <li class="header-tile__item header-title__link--color">Home
+                                        </li>
+                                    </a>
+                                    <a class="header-title__link" th:href="@{/shop}">
+                                        <li class="header-tile__item">Products</li>
+                                    </a>
+                                    <a href="#slider2" class="header-title__link">
+                                        <li class="header-tile__item">Newest</li>
+                                    </a>
+                                    <a href="#aboutus" class="header-title__link">
+                                        <li class="header-tile__item">About Us</li>
+                                    </a>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-4 header-search__cover">
+                            <form class="header-search" action="/shop/search" method="get">
+                                <input type="text" class="header-search__input" placeholder="Search here" name="keyword"
+                                    th:value="${keyword}">
+                                <button type="submit" class="header-search__link">
+                                    <i class="header-search__icon fa-solid fa-magnifying-glass"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+            </nav>
+            <nav class="row navbar-mobile">
+                <div class="col-8">
+                    <div class="navbar-mobile__logo">
+                        <img src="/images/logo-header.png" alt="" class="navbar-logo__img">
+                        <h1 class="navbar-logo__content">Phone<span class="navbar-logo__symbol">Z</span></h1>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <label class="navbar-mobile__bar-icon" for="navbar-mobile-input">
+                        <i class="fa-solid fa-bars navbar-mobile__bar-img"></i>
+                    </label>
+                </div>
+                <input type="checkbox" hidden class="navbar-input" id="navbar-mobile-input">
+                <label class="nav__overlay" for="navbar-mobile-input">
+                </label>
+                <div class="navbar-mobile__cover">
+                    <label class="navbar-mobile__exit" for="navbar-mobile-input">
+                        <i class="navbar-mobile__exit-icon fa-solid fa-x"></i>
+                    </label>
+                    <ul class="navbar-mobile__list">
+                        <a th:href="@{/}" class="navbar-mobile__link">
+                            <li class="navbar-mobile__item header-title__link--color">
+                                <span class="navbar-mobile__content">
+                                    Home
+                                </span>
+                                <i class="navbar-mobile__icon fa-solid fa-house"></i>
+                            </li>
+                        </a>
+                        <a th:href="@{/shop}" class="navbar-mobile__link">
+                            <li class="navbar-mobile__item">
+                                <span class="navbar-mobile__content">
+                                    Products
+                                </span>
+                                <i class="navbar-mobile__icon fa-solid fa-shop"></i>
+                            </li>
+                        </a>
+                        <a href="#slider2" class="navbar-mobile__link">
+                            <li class="navbar-mobile__item">
+                                <span class="navbar-mobile__content">
+                                    Newest
+                                </span>
+                                <i class="navbar-mobile__icon fa-solid fa-mobile"></i>
+                            </li>
+                        </a>
+                        <a href="#aboutus" class="navbar-mobile__link">
+                            <li class="navbar-mobile__item">
+                                <span class="navbar-mobile__content">
+                                    About Us
+                                </span>
+                                <i class="navbar-mobile__icon fa-solid fa-sailboat"></i>
+                            </li>
+                        </a>
+                        <a sec:authorize="isAnonymous()" th:href="@{/login}" class="navbar-mobile__link">
+                            <li class="navbar-mobile__item">
+                                <span class="navbar-mobile__content">
+                                    Login
+                                </span>
+                                <i class="navbar-mobile__icon fa-solid fa-key"></i>
+                            </li>
+                        </a>
+                        <a sec:authorize="isAuthenticated()" th:href="@{/logout}" class="navbar-mobile__link">
+                            <li class="navbar-mobile__item">
+                                <span class="navbar-mobile__content">
+                                    Logout
+                                </span>
+                                <i class="fa-solid fa-right-from-bracket navbar-mobile__icon"></i>
+                            </li>
+                        </a>
+                        <a class="navbar-mobile__link">
+                            <li class="navbar-mobile__item">
+                                <span class="navbar-mobile__content" th:href="@{/cart}">Cart</span>
+                                <i class="fa-solid fa-cart-shopping navbar-mobile__icon">
+                                </i>
+                            </li>
+                        </a>
+                        <span class="navbar-navigation__number" th:text="${#session.getAttribute('cartCount')}">0</span>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <div class="container-fluid background-slider">
+            <div class="row">
+                <div class="col-12 background-slider__column">
+                    <div class="background-slider__list">
+                        <div class="background-slider__item"
+                            style="background-image: url(/images/background-slider1.jpg);">
+                            <span class="background-slider__content">Quality</span>
+                        </div>
+                        <div class="background-slider__item"
+                            style="background-image: url(/images/background-slider2.jpg);">
+                            <span class="background-slider__content">Reputation</span>
+                        </div>
+                        <div class="background-slider__item"
+                            style="background-image: url(/images/background-slider3.jpg);">
+                            <span class="background-slider__content">Honest</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid product-slider" id="slider2">
+            <div class="row">
+                <div class="col-12">
+                    <div class="product-slider__heading">
+                        <h1 class="product-slider__heading-content">
+                            The Newest Products
+                        </h1>
+                    </div>
+                </div>
+            </div>
+            <div class="container-lg">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="row product-slider__cover">
+                            <div th:each="product : ${products}" class="col-lg-3">
+                                <div class="product-slider__item shine-box ">
+                                    <a th:href="@{/shop}" class="product-slider__link">
+                                        <div class="product-slider__image" style="width: 100%; height: 300px;">
+                                            <a th:href="@{/shop/viewproduct/{id}(id=${product.id})}" class="">
+                                                <img class="" height="300px" width="100%"
+                                                    th:src="@{${product.imageName}}" th:alt="${product.name}"
+                                                    src="/images/product-item.png">
+                                            </a>
+                                        </div>
+                                        <div class="product-slider__content">
+                                            <h4 class="product-slider__name" th:text="${product.name}">Iphone 14 pro max
+                                            </h4>
+                                            <span class="product-slider__price"
+                                                th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 2, 'POINT')} + ' VNĐ'">24.990.000
+                                                <span class="product-slider__currence">VNĐ</span></span>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--<div class="container-fluid advertising">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="row">
+                        <div class="col-sm-4 advertising__column" th:each="category: ${categories}"
+                            th:switch="${category.name}">
+                            <div class="advertising__image"
+                                th:style="'background-image: url(/images/' +${category.name}+'.jpg); width: 100%; height: 250px;'">
+                                <a th:href="@{/shop/category/{id}(id=${category.id})}" class="advertising__cicle">
+                                    <span class="advertising__content" th:text="${category.name}"></span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>-->
+        <div class="container-fluid advertising">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="row">
+                        <div class="col-sm-4 advertising__column">
+                            <div class="advertising__image"
+                                style="background-image: url(/images/advertise1.png); width: 100%; height: 250px;">
+                                <div class="advertising__cicle">
+                                    <span class="advertising__content">
+                                        PHOTO
+                                    </span>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 advertising__column">
+                            <div class="advertising__image"
+                                style="background-image: url(/images/advertise3.jpg); width: 100%; height: 250px;">
+                                <div class="advertising__cicle">
+                                    <span class="advertising__content">
+                                        CHATTING
+                                    </span>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 advertising__column">
+                            <div class="advertising__image"
+                                style="background-image: url(/images/advertise2.png); width: 100%; height: 250px;">
+                                <div class="advertising__cicle">
+                                    <span class="advertising__content">
+                                        GAMING
+                                    </span>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4 advertising__column">
+                            <div class="advertising__image"
+                                style="background-image: url(/images/advertise5.png); width: 100%; height: 250px;">
+                                <div class="advertising__cicle">
+                                    <span class="advertising__content">
+                                        MOVIE
+                                    </span>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 advertising__column">
+                            <div class="advertising__image"
+                                style="background-image: url(/images/advertise4.png); width: 100%; height: 250px;">
+                                <div class="advertising__cicle">
+                                    <span class="advertising__content">
+                                        MUSIC
+                                    </span>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 advertising__column">
+                            <div class="advertising__image"
+                                style="background-image: url(/images/advertise6.png); width: 100%; height: 250px;">
+                                <div class="advertising__cicle">
+                                    <span class="advertising__content">
+                                        CREATOR
+                                    </span>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid product-slider">
+            <div class="row">
+                <div class="col-12">
+                    <div class="product-slider__heading">
+                        <h1 class="product-slider__heading-content">
+                            The Category
+                        </h1>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="row product-slider__cover">
+                            <div th:each="category : ${categories}" class="col-lg-3">
+                                <div class="product-slider__item shine-box ">
+                                    <a th:href="@{/shop}" class="product-slider__link">
+                                        <div class="product-slider__image" style="width: 100%; height: 300px;">
+                                            <a th:href="@{/shop/category/{id}(id=${category.id})}" class="">
+                                                <img class="" height="300px" width="100%"
+                                                    th:src="@{'/images/' + ${category.name} + '.jpg'}"
+                                                    onerror="this.src='/images/product1.jpg'" th:alt="${category.name}">
+                                            </a>
+                                        </div>
+                                        <div class="product-slider__content">
+                                            <h4 class="product-slider__name" th:text="${category.name}"></h4>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid convenience">
+            <div class="convenience__cover">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="row convenience__cover-content">
+                                    <div class="col-sm-4">
+                                        <div class="convenience__symbol">
+                                            <i class="fa-solid fa-truck-fast convenience__icon"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <div class="convenience__content">
+                                            <h3 class="convenience__heading">Shipping and Delivery</h3>
+                                            <p class="convenience__text">There are many variations of passages of Lorem
+                                                Ipsum available, but the majority have suffered alteration in some form,
+                                                by
+                                                injected humour, or randomised words which don't look even slightly
+                                                believable.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="row convenience__cover-content">
+                                    <div class="col-sm-4">
+                                        <div class="convenience__symbol">
+                                            <i class="fa-solid fa-credit-card convenience__icon"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <div class="convenience__content">
+                                            <h3 class="convenience__heading">Payment Methods</h3>
+                                            <p class="convenience__text">There are many variations of passages of Lorem
+                                                Ipsum available, but the majority have suffered alteration in some form,
+                                                by
+                                                injected humour, or randomised words which don't look even slightly
+                                                believable.</p>
+                                            <div class="convenience__symbols">
+                                                <i class="fa-brands fa-cc-visa convenience__symbols-icon"></i>
+                                                <i class="fa-brands fa-cc-mastercard convenience__symbols-icon"></i>
+                                                <i class="fa-brands fa-cc-stripe convenience__symbols-icon"></i>
+                                                <i class="fa-brands fa-cc-paypal convenience__symbols-icon"></i>
+                                                <i class="fa-brands fa-cc-amazon-pay convenience__symbols-icon"></i>
+                                                <i class="fa-brands fa-cc-jcb convenience__symbols-icon"></i>
+                                                <i class="fa-brands fa-cc-discover convenience__symbols-icon"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="container-fluid footer" id="aboutus">
+            <div class="row">
+                <div class="col-lg-3 footer-cover">
+                    <h4 class="footer-heading">Company criteria</h4>
+                    <div class="footer_content-cover">
+                        <p class="footer_para">Contrary to popular belief, Lorem Ipsum is not simply random text. It has
+                            roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.
+                            Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one
+                            of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through
+                            the cites of the word in classical literature, discovered the undoubtable source.</p>
+                    </div>
+                </div>
+                <div class="col-lg-2 footer-cover">
+                    <h4 class="footer-heading">Category</h4>
+                    <div class="footer_content-cover">
+                        <ul class="footer-list">
+                            <li class="footer-item" th:each="category: ${categories}">
+                                <a th:href="@{/shop/category/{id}(id=${category.id})}" th:text="${category.name}"></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 footer-cover">
+                    <h4 class="footer-heading">Contacts</h4>
+                    <div class="footer_content-cover">
+                        <ul class="footer-list">
+                            <li class="footer-item"><i class="footer-item__icon fa-solid fa-house"></i>
+                                New York, NY 10022, US </li>
+                            <li class="footer-item"><i class="footer-item__icon fa-solid fa-envelope"></i>
+                                lamvuthanhtai14042002@gmail.com</li>
+                            <li class="footer-item"><i class="footer-item__icon fa-solid fa-phone"></i>
+                                +078-790-3125</li>
+                            <li class="footer-item"><i class="footer-item__icon fa-brands fa-facebook"></i>
+                                Nguyen Van Teo</li>
+                            <li class="footer-item"><i class="footer-item__icon fa-brands fa-twitter"></i>
+                                Nguyen Van Teo</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 footer-cover">
+                    <div class="mapouter">
+                        <div class="gmap_canvas"><iframe width="100%" height="100%" id="gmap_canvas"
+                                src="https://maps.google.com/maps?q=371 Nguyễn Kiệm, Phường 3, Gò Vấp, Thành phố Hồ Chí Minh&t=&z=10&ie=UTF8&iwloc=&output=embed"
+                                frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a
+                                href="https://2yu.co">2yu</a><br>
+                            <style>
+                                .mapouter {
+                                    position: relative;
+                                    text-align: right;
+                                    height: 100%;
+                                    width: 100%;
+                                }
+                            </style><a href="https://embedgooglemap.2yu.co/">html embed google map</a>
+                            <style>
+                                .gmap_canvas {
+                                    overflow: hidden;
+                                    background: none !important;
+                                    height: 100%;
+                                    width: 100%;
+                                }
+                            </style>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script src="/js/slider.js"></script>
+    <script src="/js/hiddenNavbar.js"></script>
+</body>
+
+</html>

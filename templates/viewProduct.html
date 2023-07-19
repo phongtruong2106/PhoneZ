@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+        integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="icon" href="/images/logo-header.png">
+    <!-- <link rel="stylesheet" href="/css/bootstrap.css"> -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css"
+        integrity="sha512-SbiR/eusphKoMVVXysTKG/7VseWii+Y3FdHrt0EpKgpToZeemhqHeZeLWLhJutz/2ut2Vw1uQEj2MbRF+TVBUA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/responsive.css">
+    <link rel="stylesheet" href="/css/viewProduct.css">
+    <link rel="icon" href="/images/logo-header.png">
+    <link rel="stylesheet" href="/css/taimain.css">
+    <link rel="stylesheet" href="/css/tairesponsive.css">
+    <title>PhoneZ</title>
+</head>
+
+<body>
+
+    <div class="container-fluid header-cover" id="header-cover">
+        <nav class="navbar">
+            <div class="container-sm header-width__custome">
+                <div class="col-4 navbar-cover__logo">
+                    <a class="navbar-logo" th:href="@{/}">
+                        <img src="/images/logo-header.png" alt="" class="navbar-logo__img">
+                        <h1 class="navbar-logo__content">Phone<span class="navbar-logo__symbol">Z</span></h1>
+                    </a>
+                </div>
+                <div class="col-8 navbar-cover__info">
+                    <div class="navbar-info">
+                        <h4 class="navbar-info-content">If you have any question contact us on number:
+                        </h4>
+                        <span class="navbar-info-phonenumber">078-790-3125</span>
+                    </div>
+                    <div class="navbar-navigation">
+                        <ul class="navbar-navigation__list">
+                            <a class="navbar-navigation__link" sec:authorize="isAuthenticated()">
+                                <li class="navbar-navigation__item">
+                                    <i class="fa-solid fa-user navbar-navigation__icon"></i>
+                                    <span class="navbar-navigation__content"
+                                        th:text="${#session.getAttribute('email')}">emal@gmailc.om</span>
+                                </li>
+                            </a>
+                            <a th:href="@{/login}" class="navbar-navigation__link" sec:authorize="isAnonymous()">
+                                <li class="navbar-navigation__item">
+                                    <i class="fa-solid fa-user navbar-navigation__icon"></i>
+                                    <span class="navbar-navigation__content">Create your
+                                        Acount</span>
+                                </li>
+                            </a>
+                            <a th:href="@{/login}" class="navbar-navigation__link" sec:authorize="isAnonymous()">
+                                <li class="navbar-navigation__item">
+                                    <i class="fa-solid fa-key navbar-navigation__icon"></i>
+                                    <span class="navbar-navigation__content">Login</span>
+                                </li>
+                            </a>
+
+                            <a th:href="@{/bills/history/{id}(id=${#session.getAttribute('userId')})}"
+                                class="navbar-navigation__link" sec:authorize="isAuthenticated()">
+                                <li class="navbar-navigation__item">
+                                    <i class="fa-solid fa-list-check navbar-navigation__icon"></i>
+                                    <span class="navbar-navigation__content">History</span>
+                                </li>
+                            </a>
+                            <a th:href="@{/logout}" class="navbar-navigation__link">
+                                <li class="navbar-navigation__item">
+                                    <i class="fa-solid fa-right-from-bracket navbar-navigation__icon"></i>
+                                    <span class="navbar-navigation__content"
+                                        sec:authorize="isAuthenticated()">Logout</span>
+                                </li>
+                            </a>
+                            <a th:href="@{/cart}" class="navbar-navigation__link">
+                                <li class="navbar-navigation__item">
+                                    <i class="fa-solid fa-cart-shopping navbar-navigation__icon">
+                                        <span class="navbar-navigation__number"
+                                            th:text="${#session.getAttribute('cartCount')}">0</span>
+                                    </i>
+                                    <span class="navbar-navigation__content">Cart</span>
+                                </li>
+                            </a>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <nav class="header">
+            <div class="container-sm">
+                <div class="row">
+                    <div class="col-8">
+                        <div class="header-title">
+                            <ul class="header-title__list">
+                                <a class="header-title__link" th:href="@{/}">
+                                    <li class="header-tile__item ">Home
+                                    </li>
+                                </a>
+                                <a class="header-title__link header-title__link--color" th:href="@{/shop}">
+                                    <li class="header-tile__item">Products</li>
+                                </a>
+                                <a href="/#slider2" class="header-title__link">
+                                    <li class="header-tile__item">Newest</li>
+                                </a>
+                                <a href="#aboutus" class="header-title__link">
+                                    <li class="header-tile__item">About Us</li>
+                                </a>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </nav>
+        <nav class="row navbar-mobile">
+            <div class="col-8">
+                <div class="navbar-mobile__logo">
+                    <img src="/images/logo-header.png" alt="" class="navbar-logo__img">
+                    <h1 class="navbar-logo__content">Phone<span class="navbar-logo__symbol">Z</span></h1>
+                </div>
+            </div>
+            <div class="col-4">
+                <label class="navbar-mobile__bar-icon" for="navbar-mobile-input">
+                    <i class="fa-solid fa-bars navbar-mobile__bar-img"></i>
+                </label>
+            </div>
+            <input type="checkbox" hidden class="navbar-input" id="navbar-mobile-input">
+            <label class="nav__overlay" for="navbar-mobile-input">
+            </label>
+            <div class="navbar-mobile__cover">
+                <label class="navbar-mobile__exit" for="navbar-mobile-input">
+                    <i class="navbar-mobile__exit-icon fa-solid fa-x"></i>
+                </label>
+                <ul class="navbar-mobile__list">
+                    <a th:href="@{/}" class="navbar-mobile__link">
+                        <li class="navbar-mobile__item ">
+                            <span class="navbar-mobile__content">
+                                Home
+                            </span>
+                            <i class="navbar-mobile__icon fa-solid fa-house"></i>
+                        </li>
+                    </a>
+                    <a th:href="@{/shop}" class="navbar-mobile__link">
+                        <li class="navbar-mobile__item header-title__link--color">
+                            <span class="navbar-mobile__content">
+                                Products
+                            </span>
+                            <i class="navbar-mobile__icon fa-solid fa-shop"></i>
+                        </li>
+                    </a>
+                    <a href="#slider2" class="navbar-mobile__link">
+                        <li class="navbar-mobile__item">
+                            <span class="navbar-mobile__content">
+                                Newest
+                            </span>
+                            <i class="navbar-mobile__icon fa-solid fa-mobile"></i>
+                        </li>
+                    </a>
+                    <a href="#aboutus" class="navbar-mobile__link">
+                        <li class="navbar-mobile__item">
+                            <span class="navbar-mobile__content">
+                                About Us
+                            </span>
+                            <i class="navbar-mobile__icon fa-solid fa-sailboat"></i>
+                        </li>
+                    </a>
+                    <a sec:authorize="isAnonymous()" th:href="@{/login}" class="navbar-mobile__link">
+                        <li class="navbar-mobile__item">
+                            <span class="navbar-mobile__content">
+                                Login
+                            </span>
+                            <i class="navbar-mobile__icon fa-solid fa-key"></i>
+                        </li>
+                    </a>
+                    <a sec:authorize="isAuthenticated()" th:href="@{/logout}" class="navbar-mobile__link">
+                        <li class="navbar-mobile__item">
+                            <span class="navbar-mobile__content">
+                                Logout
+                            </span>
+                            <i class="fa-solid fa-right-from-bracket navbar-mobile__icon"></i>
+                        </li>
+                    </a>
+                    <a class="navbar-mobile__link">
+                        <li class="navbar-mobile__item">
+                            <span class="navbar-mobile__content" th:href="@{/cart}">Cart</span>
+                            <i class="fa-solid fa-cart-shopping navbar-mobile__icon">
+                            </i>
+                        </li>
+                    </a>
+                    <span class="navbar-navigation__number" th:text="${#session.getAttribute('cartCount')}">0</span>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+
+    <div class="spacer" style="padding-top: 160px;"></div>
+
+    <div class="container">
+        <div class="row  view_Product-Page_container">
+            <div class="col-sm-5 d-flex justify-content-center">
+                <img class="mt-5" height="300px" width="300px" src="" th:src="@{${product.imageName}}" alt="">
+            </div>
+            <div class="col-sm-7 mt-5 view_Page_Info">
+                <h2 th:text="${product.name}"></h2>
+                <p th:text="${product.category.name}"></p>
+                <h2> <span th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 2, 'POINT')}"></span> VND</h2>
+
+                <p th:text="${product.description}"></p>
+                <form th:action="@{/addToCart(productId=${product.id})}" method="post">
+                    <label class="font-weight-bold">Quantity: </label>
+                    <input type="number" name="quantity" value="1" class="input" min="1" placeholder="Type...">
+                    <button type="submit" class="view_Product-btn_add_to_Cart">
+                        Add to cart
+                        <i class="fa-solid fa-cart-shopping icon_cart"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+    <script src="/js/hiddenNavbar.js"></script>
+</body>
+
+</html>

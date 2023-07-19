@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+        integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <link rel="stylesheet" href="https://kit.fontawesome.com/dd7e8a6c0f.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/responsive.css">
+    <link rel="icon" href="/images/logo-header.png">
+    <title>PhoneZ</title>
+</head>
+
+<body>
+    <div class="admin_page-background jumbotron text-center">
+        <div class="d-flex flex-column justify-content-center w-100 h-100">
+
+            <div class="d-flex flex-column justify-content-center align-items-center">
+                <h1 class="fw-light text-white m-0">CATEGORIES, ADMIN</h1>
+                <a href="/" class="text-decoration-none">
+                    <h5 class="fw-light text-white m-0">— Bán điện thoại uy tín —</h5>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="menu_bar_admin-Home">
+        <nav class="navbar_Admin_Home">
+            <div class="col-md-8"></div>
+            <div class="col-md-2 menu_bar_Admin_Home" id="Menu_bar_Admin_Home_Background">
+                <a class="nav-link" th:href="@{/admin}" href="#">
+                    <i class="fas fa-home"></i>
+                    <div>
+                        <span>
+                            Admin
+                            <br> Home
+                        </span>
+
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-2 menu_bar_Admin_Home" id="Menu_bar_Admin_Home_Background">
+                <a class="nav-link" th:href="@{/logout}" href="#">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <div>
+                        <span>
+                            Logout
+                        </span>
+
+                    </div>
+                </a>
+
+            </div>
+        </nav>
+
+    </div>
+    <div class="container categories_page_container">
+        <div class="categories_page_container-input">
+
+            <form class="row no-gutters justify-content-center categories_page_container-form" action="/categories/search" method="get">
+                <input type="text" placeholder="Search" class="input_categories" name="keyword" th:value="${keyword}">
+                <button class="fas fa-search categories_page_container-btn_s" name="query" type="submit"></button>
+            </form>
+        </div>
+
+        <a th:href="@{/admin/categories/add}" style="margin: 20px 0"
+            class="btn btn-primary categories_Page_Btn_add_category">Add Category</a>
+        <table class="table categories_page_table">
+            <thead class="thead-light categories_page_thead">
+                <tr>
+                    <th scope="col">SN</th>
+                    <th scope="col">Category Name</th>
+                    <th scope="col">Delete</th>
+                    <th scope="col">Update</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="category, iStat : ${categories}">
+                    <th scope="row" th:text="${iStat.index + 1}">1</th>
+                    <td th:text="${category.name}">TEST</td>
+                    <td><a href="" th:href="@{/admin/categories/delete/{id}(id=${category.id})}"
+                            class="btn btn-danger categories_page-btn_danger"><i class="fas fa-trash"></i></a></td>
+                    <td><a href="" th:href="@{/admin/categories/update/{id}(id=${category.id})}"
+                            class="btn btn-warning categories_page-btn_warning"><i class="fas fa-edit"></i></a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

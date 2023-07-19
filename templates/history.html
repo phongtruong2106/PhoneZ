@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Link bottraps framework -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/bootstrap.css">
+
+    <!-- Link font and icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+        integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+        integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <link rel="stylesheet" href="https://kit.fontawesome.com/dd7e8a6c0f.css" crossorigin="anonymous">
+    <link rel="icon" href="/images/logo-header.png">
+    <!-- Link CSS file -->
+    <link rel="stylesheet" href="/css/taimain.css">
+    <link rel="stylesheet" href="/css/taibase.css">
+    <link rel="stylesheet" href="/css/tairesponsive.css">
+    <link rel="stylesheet" href="/css/history.css">
+
+
+
+    <title>PhoneZ</title>
+
+</head>
+
+<body>
+    <div class="container-fluid header-cover" id="header-cover">
+        <nav class="navbar">
+            <div class="container-sm header-width__custome">
+                <div class="col-4 navbar-cover__logo">
+                    <a class="navbar-logo" th:href="@{/}">
+                        <img src="/images/logo-header.png" alt="" class="navbar-logo__img">
+                        <h1 class="navbar-logo__content">Phone<span class="navbar-logo__symbol">Z</span></h1>
+                    </a>
+                </div>
+                <div class="col-8 navbar-cover__info">
+                    <div class="navbar-info">
+                        <h4 class="navbar-info-content">If you have any question contact us on number:
+                        </h4>
+                        <span class="navbar-info-phonenumber">078-790-3125</span>
+                    </div>
+                    <div class="navbar-navigation">
+                        <ul class="navbar-navigation__list">
+                            <a th:href="@{/logout}" class="navbar-navigation__link">
+                                <li class="navbar-navigation__item">
+                                    <i class="fa-solid fa-right-from-bracket navbar-navigation__icon"></i>
+                                    <span class="navbar-navigation__content"
+                                        sec:authorize="isAuthenticated()">Logout</span>
+                                </li>
+                            </a>
+                            <a th:href="@{/cart}" class="navbar-navigation__link">
+                                <li class="navbar-navigation__item">
+                                    <i class="fa-solid fa-cart-shopping navbar-navigation__icon">
+                                        <span class="navbar-navigation__number"
+                                            th:text="${#session.getAttribute('cartCount')}">0</span>
+                                    </i>
+                                    <span class="navbar-navigation__content">Cart</span>
+                                </li>
+                            </a>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <nav class="header">
+            <div class="container-sm">
+                <div class="row">
+                    <div class="col-8">
+                        <div class="header-title">
+                            <ul class="header-title__list">
+                                <a class="header-title__link" th:href="@{/}">
+                                    <li class="header-tile__item ">Home
+                                    </li>
+                                </a>
+                                <a class="header-title__link" th:href="@{/shop}">
+                                    <li class="header-tile__item">Products</li>
+                                </a>
+                                <a href="/#slider2" class="header-title__link">
+                                    <li class="header-tile__item">Newest</li>
+                                </a>
+                                <a href="#aboutus" class="header-title__link">
+                                    <li class="header-tile__item">About Us</li>
+                                </a>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-4 header-search__cover">
+                        <form class="header-search" action="/shop/search" method="get">
+                            <input type="text" class="header-search__input" placeholder="Search here" name="keyword"
+                                th:value="${keyword}">
+                            <button type="submit" class="header-search__link">
+                                <i class="header-search__icon fa-solid fa-magnifying-glass"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <nav class="row navbar-mobile">
+            <div class="col-8">
+                <div class="navbar-mobile__logo">
+                    <img src="/images/logo-header.png" alt="" class="navbar-logo__img">
+                    <h1 class="navbar-logo__content">Phone<span class="navbar-logo__symbol">Z</span></h1>
+                </div>
+            </div>
+            <div class="col-4">
+                <label class="navbar-mobile__bar-icon" for="navbar-mobile-input">
+                    <i class="fa-solid fa-bars navbar-mobile__bar-img"></i>
+                </label>
+            </div>
+            <input type="checkbox" hidden class="navbar-input" id="navbar-mobile-input">
+            <label class="nav__overlay" for="navbar-mobile-input">
+            </label>
+            <div class="navbar-mobile__cover">
+                <label class="navbar-mobile__exit" for="navbar-mobile-input">
+                    <i class="navbar-mobile__exit-icon fa-solid fa-x"></i>
+                </label>
+                <ul class="navbar-mobile__list">
+                    <a th:href="@{/}" class="navbar-mobile__link">
+                        <li class="navbar-mobile__item ">
+                            <span class="navbar-mobile__content">
+                                Home
+                            </span>
+                            <i class="navbar-mobile__icon fa-solid fa-house"></i>
+                        </li>
+                    </a>
+                    <a th:href="@{/shop}" class="navbar-mobile__link">
+                        <li class="navbar-mobile__item">
+                            <span class="navbar-mobile__content">
+                                Products
+                            </span>
+                            <i class="navbar-mobile__icon fa-solid fa-shop"></i>
+                        </li>
+                    </a>
+                    <a href="#slider2" class="navbar-mobile__link">
+                        <li class="navbar-mobile__item">
+                            <span class="navbar-mobile__content">
+                                Newest
+                            </span>
+                            <i class="navbar-mobile__icon fa-solid fa-mobile"></i>
+                        </li>
+                    </a>
+                    <a href="#aboutus" class="navbar-mobile__link">
+                        <li class="navbar-mobile__item">
+                            <span class="navbar-mobile__content">
+                                About Us
+                            </span>
+                            <i class="navbar-mobile__icon fa-solid fa-sailboat"></i>
+                        </li>
+                    </a>
+                    <a sec:authorize="isAnonymous()" th:href="@{/login}" class="navbar-mobile__link">
+                        <li class="navbar-mobile__item">
+                            <span class="navbar-mobile__content">
+                                Login
+                            </span>
+                            <i class="navbar-mobile__icon fa-solid fa-key"></i>
+                        </li>
+                    </a>
+                    <a sec:authorize="isAuthenticated()" th:href="@{/logout}" class="navbar-mobile__link">
+                        <li class="navbar-mobile__item">
+                            <span class="navbar-mobile__content">
+                                Logout
+                            </span>
+                            <i class="fa-solid fa-right-from-bracket navbar-mobile__icon"></i>
+                        </li>
+                    </a>
+                    <a class="navbar-mobile__link">
+                        <li class="navbar-mobile__item">
+                            <span class="navbar-mobile__content" th:href="@{/cart}">Cart</span>
+                            <i class="fa-solid fa-cart-shopping navbar-mobile__icon">
+                            </i>
+                        </li>
+                    </a>
+                    <span class="navbar-navigation__number" th:text="${#session.getAttribute('cartCount')}">0</span>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <div id="main">
+
+        <div class="container-fluid history_page_container">
+
+            <table class="table his_page_table">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">SN</th>
+                        <th scope="col">Product's name</th>
+                        <th scope="col">Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr th:each="bill, iStat : ${bills}" th:if="${bill.user.id} == ${#session.getAttribute('userId')}">
+                        <th scope="row" th:text="${iStat.index + 1}">1</th>
+
+                        <td>
+                            <a class="nav-link" th:href="@{/bills/viewbill/{id}(id=${bill.id})}" href="#">
+                                <span th:each="product : ${bill.productName}" th:text="${product} + '; '"></span>
+                            </a>
+                        </td>
+                        <td th:text="${#numbers.formatDecimal(bill.price, 0, 'COMMA', 2, 'POINT')} + ' VNĐ'">Larry</td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <footer class="container-fluid footer footer_his" id="aboutus">
+        <div class="row">
+            <div class="col-lg-3 footer-cover">
+                <h4 class="footer-heading">Company criteria</h4>
+                <div class="footer_content-cover">
+                    <p class="footer_para">Contrary to popular belief, Lorem Ipsum is not simply random text. It has
+                        roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.
+                        Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one
+                        of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through
+                        the cites of the word in classical literature, discovered the undoubtable source.</p>
+                </div>
+            </div>
+            <div class="col-lg-2 footer-cover">
+                <h4 class="footer-heading">Category</h4>
+                <div class="footer_content-cover">
+                    <ul class="footer-list">
+                        <li class="footer-item">Sam sung</li>
+                        <li class="footer-item">Iphone</li>
+                        <li class="footer-item">Xiaomi</li>
+                        <li class="footer-item">Nokia</li>
+                        <li class="footer-item">Oppo</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-3 footer-cover">
+                <h4 class="footer-heading">Contacts</h4>
+                <div class="footer_content-cover">
+                    <ul class="footer-list">
+                        <li class="footer-item"><i class="footer-item__icon fa-solid fa-house"></i>
+                            New York, NY 10022, US </li>
+                        <li class="footer-item"><i class="footer-item__icon fa-solid fa-envelope"></i>
+                            lamvuthanhtai14042002@gmail.com</li>
+                        <li class="footer-item"><i class="footer-item__icon fa-solid fa-phone"></i>
+                            +078-790-3125</li>
+                        <li class="footer-item"><i class="footer-item__icon fa-brands fa-facebook"></i>
+                            Nguyen Van Teo</li>
+                        <li class="footer-item"><i class="footer-item__icon fa-brands fa-twitter"></i>
+                            Nguyen Van Teo</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-4 footer-cover">
+                <div class="mapouter">
+                    <div class="gmap_canvas"><iframe width="100%" height="100%" id="gmap_canvas"
+                            src="https://maps.google.com/maps?q=371 Nguyễn Kiệm, Phường 3, Gò Vấp, Thành phố Hồ Chí Minh&t=&z=10&ie=UTF8&iwloc=&output=embed"
+                            frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a
+                            href="https://2yu.co">2yu</a><br>
+                        <style>
+                            .mapouter {
+                                position: relative;
+                                text-align: right;
+                                height: 100%;
+                                width: 100%;
+                            }
+                        </style><a href="https://embedgooglemap.2yu.co/">html embed google map</a>
+                        <style>
+                            .gmap_canvas {
+                                overflow: hidden;
+                                background: none !important;
+                                height: 100%;
+                                width: 100%;
+                            }
+                        </style>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/backtotop.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>
